@@ -1,0 +1,965 @@
+  .container {
+    grid-template-rows: repeat(7, min-content); /* 7 rows for main page */
+  }
+  
+  /* Banner Section */
+  .banner {
+    grid-column: 1/-1;  /* Banner Section takes full width of page */
+    grid-row: 2/3;      /* Banner Section on 2nd Row */
+    background: #fff url(../images/bg1.jpg) no-repeat top -28px center; /* Background image*/
+    display: grid;        /* Banner Section is grid */
+    padding-bottom: 1rem;
+    grid-template-columns: repeat(30, 1fr);
+    grid-template-rows: repeat(5, min-content);
+  }
+  .banner-logo {    /* Wrapper For Banner Logo */
+    grid-column: 8/14;
+    grid-row: 2/3;
+    margin-top: -1rem;
+    outline: none;
+  }
+  .cuberoot-logo {    /* CubeRoot Logo on Left Hand*/
+    outline: none;
+  }
+  .banner-title {     /* Banner Title on Right Hand*/
+    grid-column: 15/29;
+    grid-row: 1/2;
+    padding-top: 2.5rem;
+  }
+  .banner-link1 {     /* 1st Banner on Right Hand*/
+    grid-column: 15/29;
+    grid-row: 2/3;
+    outline: none;
+  }
+  .banner-link2 {     /* 2nd Banner on Right Hand*/
+    grid-column: 15/29;
+    grid-row: 3/4;
+    outline: none;
+  }
+  .banner-link3 {     /* 3rd Banner on Right Hand*/
+    grid-column: 15/29;
+    grid-row: 4/5;
+    outline: none;
+  }
+  .banner-telno {     /* Telephone Number */
+    grid-column: 18/25;
+    grid-row: 5/6;
+  }
+  /* End of Banner */
+
+  
+  /* Slide and Form */
+  /*Gallery Slide*/
+  .slideshow-form {
+    grid-column: 2/10;
+    grid-row: 3/4;
+    display: grid;
+    grid-template-columns: repeat(30, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    grid-gap: .5rem;
+    padding-bottom: 1rem;
+    margin: 1rem 0 0 1rem;
+  }
+  .gallery-container {
+    grid-column: 3/22;
+    grid-row: 1/-1;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .slide-wrapper {  /*Image Holder*/
+    width: 100%;    /*takes whole width*/
+    height: 90%;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .captionHolder {  /*Caption Text Holder Style*/
+    position: absolute;
+    background: #2b2a2a47;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    z-index: 10;
+  }
+  .captionHolderTop { /*Caption Text for Top Holder Style*/
+    font-size: 2.2rem;
+    white-space: nowrap;
+    font-weight: 700;
+    top: 0;
+  }
+  .captionHolderBot { /*Caption Text for Bottom Holder Style*/
+    font-style: italic;
+    top: 40px;
+  }
+  .captionTextTop {   /*Top Caption text styling*/
+    margin: 0;
+  }
+  .captionTextBot {   /*Bottom Caption text styling*/
+    margin: 0;    
+  }
+  
+  /*Left and Right Arrows*/
+  .arrowbg {                /* Arrow Holders*/
+    position: absolute;
+    width: 40px;
+    height: 62px;
+    top: 40%;
+    transform: translateY(-50%);
+    background: #00000036;
+    z-index: 1;
+    transition: background .5s;
+  }
+  .leftArrow {              /* Left Arrow Holder*/
+    left: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .rightArrow {             /* Right Arrow Holders*/
+    left: auto;
+    right: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  .leftArrow:hover,         /*hover effects for arrowbg */
+  .rightArrow:hover {
+    background: #000000a8;
+    cursor: pointer;
+  }
+  .arrow {                  /* Arrow Symbol, create box, remove 2 borders and rotate by 45deg*/
+    display: inline-block;
+    border: 3px solid white;
+    width: 10px;  
+    height: 10px;
+    border-left: none;  /* Remove left border*/
+    border-bottom: none;  /* Remove bottom border*/
+    margin: auto;         /* centralise box */
+    position: absolute;
+    left: 0;              /* Left, right, top, bottom == 0, to centrialise to holder*/
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  .arrowLeft {            /* Left Arrow Symbol */
+    transform: rotateZ(-135deg);  /* rotate anticlockwise by 45deg */
+  }
+  .arrowRight {           /* Right Arrow Symbol */
+    transform: rotateZ(45deg);  /* rotate clockwise by 45deg */
+  }
+  .slide-holder {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+  }
+  .image-holder {
+    height: 80%;
+  }
+  .image-holder p {
+    /*Caption on Image*/
+    display: none;
+  }
+  .slide-img {
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    object-fit: cover;
+  }
+  
+  /*Dots continer and its styling*/
+  #dotsContainer {  /* styles for dots Container*/
+    background-color: #7bb300;
+    width: 100%;
+    height: 10%;
+    text-align: center;     /* center elements */
+    padding-top: 20px;
+    box-sizing: border-box; /* padding, margin incld in width, height*/
+  }
+  .dots { /* styles for dots*/
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%; /* make them into circle*/
+    margin-left: 5px; /*space between dots*/
+    background-color: #bbb;
+    cursor: pointer;
+    transition: background-color .5s;
+  }
+  .dots:first-child { /* select 1st dot */
+    margin-left: 0;   /* remove margin-left */
+  }
+  .dots:hover,
+  .dots.active {
+    background-color: #717171;
+  }
+  /*Slide Animation for images and Reviews*/
+  /*Animation To move Slide from Current to Next Slide*/
+  .moveLeftCurrentSlide { /*move current slide to left */
+    animation-name: moveLeftCurrent;
+    animation-duration: .5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+  @keyframes moveLeftCurrent {
+    from {
+      margin-left: 0;   /*from current left pos*/
+      opacity: 1;
+    }
+    to {
+      margin-left: -100%; /*to next left pos*/
+      opacity: 1;
+    }
+  }
+  .moveLeftNextSlide {  /*move new slide from left into wrapper */
+    animation-name: moveLeftNext;
+    animation-duration: .5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+  @keyframes moveLeftNext {
+    from {
+      margin-left: 100%;
+      opacity: 1;
+    }
+    to {
+      margin-left: 0%;
+      opacity: 1;
+    }
+  }
+  /*Move slide to the right*/
+  .moveRightCurrentSlide {  /*move current slide to the right, ie out of view*/
+    animation-name: moveRightCurrent;
+    animation-duration: .5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+  @keyframes moveRightCurrent {
+    from {
+      margin-left: 0;
+      opacity: 1;
+    }
+    to {
+      margin-left: 100%;
+      opacity: 1;
+    }
+  }
+  .moveRightPrevSlide { /*move the new slide to the right, ie in View*/
+    animation-name: moveRightPrev;
+    animation-duration: .5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+  @keyframes moveRightPrev {
+    from {
+      margin-left: -100%;
+      opacity: 1;
+    }
+    to {
+      margin-left: 0%;
+      opacity: 1;
+    }
+  }
+  /*Animation for Caption Text*/
+  .slideTextFromBottom {
+    animation-name: slideTextFromBottom;
+    animation-duration: .7s;
+    animation-timing-function: ease-out;
+  }
+  @keyframes slideTextFromBottom {
+    from {
+      opacity: 0;
+      margin-top: 100px;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0px;
+    }
+  }
+  .slideTextFromTop {
+    animation-name: slideTextFromTop;
+    animation-duration: .7s;
+    animation-timing-function: ease-out;
+  }
+  @keyframes slideTextFromTop {
+    from {
+      opacity: 0;
+      margin-top: -100px;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0px;
+    }
+  }
+  /*Review Secton*/
+  .review-holder {
+    width: 100%;
+    height: 20%;      /*20% of height of gallery container*/
+    background-color: #7bb300;
+    border-top: 5px solid white;  /*separator between image and review*/
+    position: relative;
+  }
+  .review-para {
+    padding: 1rem 0 .5rem 1rem;
+    font-size: 1.5rem;
+    color: #000;
+  }
+  .review-name {
+    padding-left: 1rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    position: absolute;
+    bottom: .5rem;
+  }
+  /*End of Gallery Slide*/
+  
+  /* Form */
+  .form {
+    grid-column: 22/29;
+    grid-row: 1/-1;
+    border: none;
+    outline: none;
+  }
+  .form-paragraph {
+    height: 5rem;
+    padding: 1rem 1.5rem 3.5rem 1.5rem;
+    margin: 1.9rem 0;
+  }
+  /*End of Form*/
+  /* End of Slide and Form */
+  
+  /* Services */
+  .services {
+    grid-column: 2/10;
+    grid-row: 4/5;
+    display: grid;
+    grid-template-columns: repeat(31, 1fr);
+    grid-template-rows: 30rem;
+    grid-column-gap: 1rem;
+    padding-bottom: 2rem;
+    margin: 1.6rem 0 0 1rem;
+  }
+  .solar-pv-service {
+    grid-column: 3/12;
+    grid-row: 1/2;
+    background: #fff url(../images/cuberoot_box1.png) no-repeat top center;
+    background-size: cover;
+    position: relative;
+    border-radius: .1rem;
+  }
+  .solar-thermal-service {
+    grid-column: 12/21;
+    grid-row: 1/2;
+    background: #fff url(../images/cuberoot_box2.png) no-repeat top center;
+    background-size: cover;
+    position: relative;
+    border-radius: .1rem;
+  }
+  .repairs-service {
+    grid-column: 21/30;
+    grid-row: 1/2;
+    background: #fff url(../images/cuberoot_box3.png) no-repeat top center;
+    background-size: cover;
+    position: relative;
+    border-radius: .1rem;
+    margin-right: .4rem;
+  }
+  .service-header {
+    height: 2.5rem;
+    border-radius: 0.1rem;
+    font-size: 1.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    background: linear-gradient(to top, #f5ab27, #f7bf22, #f4a259);
+    padding: .9rem;
+    margin: auto;
+    text-align: center;
+    color: #000;
+  }
+  .service-footnotes {
+    display: flex;
+    background-color: #000;
+    opacity: .8;
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+  }
+  .service-footnote-para {
+    padding: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 2rem;
+  }
+  .service-footnote-link {
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem 0.5rem;
+    color: #ffcf06;
+    outline: none;
+    text-decoration: none;
+    transition: color .5s;
+  }
+  .service-footnote-link:hover {
+    color: #fff;
+  }
+  /* End of Services */
+  
+  
+  /* Description */
+  .description {
+    grid-column: 2/10;
+    grid-row: 5/6;
+    margin: 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(30, 1fr);
+    grid-template-rows: 1fr;
+  }
+  .energy-performance {
+    grid-column: 3/16;
+    grid-row: 1/2;
+    background-color: #7bb300;
+    border-radius: .5rem .5rem 0 0;
+  }
+  .why-invest {
+    grid-column: 16/29;
+    grid-row: 1/2;
+    background-color: #7bb300;
+    border-radius: .5rem .5rem 0 0;
+  }
+  .description-headers {
+    white-space: nowrap;
+    height: 2.5rem;
+    text-align: left;
+    font-size: 1.9rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    background: linear-gradient(to top, #f5ab27, #f7bf22, #f4a259);
+    padding: .9rem;
+    border-radius: .1rem;
+    margin-bottom: 1rem;
+  }
+  .energy-performance-content {
+    display: flex;
+  }
+  .why-invest-content {
+    display: flex;
+  }
+  .description-image-container {
+    padding: 1rem;
+    border-image-width: 15rem;
+    width: 35%;
+  }
+  .description-image {
+    width: 100%;
+  }
+  .description-content {
+    position: relative;
+    width: 65%;
+  }
+  .description-text {
+    top: 0;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 520;
+    line-height: 2rem;
+  }
+  .description-link {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #000;
+    opacity: .7;
+    padding: 1rem;
+    outline: none;
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    transition: color .3s;
+  }
+  .description-link:hover {
+    color: gold;
+  }
+  /* End of Description */
+  
+  /* Suppliers-logos */
+  .supplier-logos {
+    grid-column: 3/9;
+    grid-row: 6/7;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    align-items: center;
+  }
+  .supplier-logo1{
+    grid-column: 1/2;
+    grid-row: 1/2;
+  } 
+  .supplier-logo2{
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+  .supplier-logo3{
+    grid-column: 3/4;
+    grid-row: 1/2;
+  }
+  .supplier-logo4{
+    grid-column: 4/-1;
+    grid-row: 1/2;
+  }
+  /* End of Suppliers-logos */
+  
+  
+  /* Footer */
+  .footer {
+    grid-column: 1/-1;
+    grid-row: 7/8;
+  }
+  /* End of footer */
+  
+  /* Responsiveness */
+  @media (max-width: 1500px) {                /*1500px Screen size */
+    .banner-logo {
+      grid-column: 7/13;
+    }
+  }
+  @media (max-width: 1300px) {                /*1300px Screen size */
+    .banner-logo {
+      grid-column: 6/12;
+    }
+    .review-para {
+      font-size: 1.3rem;
+    }
+    .service-footnote-para {
+      font-size: 1.2rem;
+    }
+    .description-headers {
+      font-size: 1.7rem;
+    }
+  }
+  @media (max-width: 1200px) {                /*1200px Screen size */
+    .banner-logo {
+      grid-column: 5/11;
+    }
+    .banner-title, .banner-link1 img, .banner-link2 img, .banner-link3 img {
+      width: 95%;
+      height: auto;
+    }
+    .service-footnote-para {
+      font-size: 1.2rem;
+    }
+    .description-image img {
+      width: 80%;
+      height: auto;
+    }
+    .form-paragraph{
+      font-size: 1.3rem;
+    }
+  }
+  @media (max-width: 1100px) {            /*1100px Screen size */
+    .captionHolder{
+      font-size: 18px;
+    }
+  }
+  @media (max-width: 1050px) {            /*1050px Screen size */
+    /* modifying nav bar */
+    
+    .cuberoot-logo{
+      display: none;
+    }
+    /* text in form */
+    .form-paragraph{
+      font-size: 1.2rem;
+    }
+    /* Services Section */
+    .services{
+      grid-template-columns: repeat(32, 1fr);
+      grid-template-rows: 30rem 30rem;
+      grid-row-gap: 1rem;
+    }
+    .solar-pv-service {
+      grid-column: 4/17;
+      grid-row: 1/2;
+    }
+    .solar-thermal-service {
+      grid-column: 17/30;
+      grid-row: 1/2;
+    }
+    .repairs-service {
+      grid-column: 10/23;
+      grid-row: 2/-1;
+      margin-right: 0;
+    }
+    .service-footnote-para{
+      font-size: 1.3rem;
+    }
+    .description {
+      grid-template-rows: repeat(2, 1fr);
+      grid-row-gap: 1rem;
+    }
+    .energy-performance {
+      grid-column: 3/29;
+      grid-row: 1/2;
+    }
+    .why-invest {
+      grid-column: 3/29;
+      grid-row: 2/3;
+    }
+    .description-headers {
+      text-align: center;
+    }
+    /* Suppliers-logos */
+    .supplier-logos {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      justify-items: center;
+      align-items: center;
+    }
+    .supplier-logo1{
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
+    .supplier-logo2{
+      grid-column: 2/3;
+      grid-row: 1/2;
+    }
+    .supplier-logo3{
+      grid-column: 3/4;
+      grid-row: 1/2;
+    }
+    .supplier-logo4{
+      grid-column: 2/3;
+      grid-row: 2/3;
+    }
+  }
+  @media (max-width: 1010px) {                /*1010px Screen size */
+    
+    .banner-title, .banner-link1, .banner-link2, .banner-link3{
+      width: 120%;
+      grid-column: 12/27;
+    }
+    .banner-telno {
+      width: 120%;
+      grid-column: 15/23;
+    }
+    .slideshow-form {
+      grid-template-columns: repeat(30, 1fr);
+      grid-template-rows: repeat(16, 2fr);
+    }
+    .gallery-container {
+      grid-column: 3/29;
+      grid-row: 1/9;
+    }
+    .form {
+      grid-column: 11/21;
+      grid-row: 9/17;
+    }
+  }
+  @media (max-width: 950px) {                /*950px Screen size */
+    .banner-title, .banner-link1, .banner-link2, .banner-link3 {
+      grid-column: 12/27;
+    }
+    .banner-telno {
+      grid-column: 15/23;
+    }
+  }
+   @media (max-width: 800px) {                /*800px Screen size*/
+    .banner-title, .banner-link1,  .banner-link2, .banner-link3{
+      grid-column: 11/27;
+    }
+    .banner-telno {
+      grid-column: 14/23;
+    }
+    .service-footnote-para{
+      font-size: 1.2rem;
+      line-height: 1.8rem;
+    }
+    .service-footnote-link {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+  } 
+  @media (max-width: 700px) {                /*700px Screen size*/
+    .banner-title, .banner-link1,  .banner-link2, .banner-link3{
+      width: 110%;
+      grid-column: 7/27;
+    }
+    .banner-telno {
+      width: 110%;
+      grid-column: 10/23;
+    }
+    .form {
+      grid-column: 8/24; /* widen form */
+    }
+    /* Services Section */
+    .services{
+      grid-template-columns: repeat(31, 1fr);
+      grid-template-rows: repeat(3, 30rem);
+      grid-row-gap: 1rem;
+    }
+    .solar-pv-service {
+      grid-column: 8/25;
+      grid-row: 1/2;
+    }
+    .solar-thermal-service {
+      grid-column: 8/25;
+      grid-row: 2/3;
+    }
+    .repairs-service {
+      grid-column: 8/25;
+      grid-row: 3/-1;
+      margin-right: 0;
+    }
+    .supplier-logos {
+      grid-column: 4/8;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      justify-items: center;
+      align-items: center;
+    }
+    .supplier-logo1{
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
+    .supplier-logo2{
+      grid-column: 2/3;
+      grid-row: 1/2;
+    }
+    .supplier-logo3{
+      grid-column: 1/2;
+      grid-row: 2/3;
+    }
+    .supplier-logo4{
+      grid-column: 2/3;
+      grid-row: 2/3;
+    }
+    .service-footnote-para{
+      font-size: 1.5rem;
+    }
+  }
+  @media (max-width: 650px) {                /*650px Screen size*/
+    .solar-pv-service,  .solar-thermal-service, .repairs-service{
+      grid-column: 6/27;
+    }
+    .form {
+      grid-column: 6/26;
+      grid-row: 9/17;
+    }
+  }
+  @media (max-width: 600px) {                /*600px Screen size*/
+    .banner-title, .banner-link1,  .banner-link2, .banner-link3{
+      width: 110%;
+      grid-column: 5/27;
+    }
+    .banner-telno {
+      width: 110%;
+      grid-column: 10/23;
+    }
+    .gallery-container {
+      grid-column: 1/31;
+    }
+  }
+  @media (max-width: 550px) {                /*550px Screen size*/
+    .banner-title, .banner-link1,  .banner-link2, .banner-link3{
+      grid-column: 4/27;
+    }
+    .gallery-container{
+      grid-row: 1/8;
+    }
+    .captionHolder{
+      font-size: 16px;
+      line-height: 25px;
+      height: 30px;
+    }
+    .captionHolderBot {
+      top: 30px;
+    }
+    .review-para {
+      padding: 1rem 0 .5rem 1rem;
+      font-size: 1.1rem;
+    }
+    .review-name {
+      font-size: 1.4rem;
+      padding-left: 1rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      bottom: .5rem;
+    }
+    .form {
+      grid-column: 6/26;
+      grid-row: 8/16;
+    }
+    .form-paragraph{
+      font-size: 1.1rem;
+    }
+    .form-input {
+      height: 1.6rem;
+      border-radius: .5rem;
+      padding: .5rem;
+      margin: 1rem;
+    }
+    .query-input {
+      border-radius: .5rem;
+      margin: .5rem 1.2rem;
+      font-size: 1.4rem;
+    }
+    .slideshow-form {
+      grid-template-rows: repeat(15, 2fr);
+    }
+  }
+  @media (max-width: 500px) {                /*500px Screen size*/
+    .nav-links {
+      font-size: 1.3rem;
+      margin: .4rem 0;
+    }
+    .dropdown-list-link{
+      font-size: 1.3rem;
+      margin: .2rem 0;
+    }
+    .banner-title, .banner-link1,  .banner-link2, .banner-link3{
+      grid-column: 2/27;
+    }
+    #dotsContainer{
+      padding-top: 15px;
+    }
+    .supplier-logo1-img, .supplier-logo2-img, .supplier-logo3-img, .supplier-logo4-img{
+      width: 100%;
+    }
+    .solar-pv-service, .solar-thermal-service, .repairs-service{
+      grid-column: 4/29;
+    }
+    .form-header{
+      font-size: 1.2rem;
+    }
+    .service-header{
+      height: 2.1rem;
+      font-size: 1.4rem;
+    }
+    .service-footnote-para{
+      font-size: 1.3rem;
+    }
+    .description-headers{
+      height: 1.9rem;
+      font-size: 1.3rem;
+    }
+    .description-text{
+      font-size: 1rem;
+    }
+    .description-link{
+      font-size: 1.2rem;
+    }
+  }
+  @media (max-width: 450px) {                /*450px Screen size*/
+    .slideshow-form {
+      grid-template-rows: repeat(14, 2fr);
+    }
+    .gallery-container{
+      grid-row: 1/7;
+    }
+    .captionHolder{
+      font-size: 14px;
+      line-height: 20px;
+      height: 30px;
+    }
+    .captionHolderBot {
+      top: 30px;
+    }
+    .review-para {
+      padding: 1rem 0 .5rem 1rem;
+      font-size: .9rem;
+    }
+    .review-name {
+      font-size: 1.2rem;
+      bottom: .3rem;
+    }
+    .dots{
+      width: 12px;
+      height: 12px;
+    }
+    .form {
+      grid-column: 6/26;
+      grid-row: 7/15;
+    }
+    .form-paragraph{
+      font-size: .9rem;
+    }
+  }
+  @media (max-width: 400px) {                /*400px Screen size*/
+    .banner-title{
+      width: 100%;
+    }
+    .captionHolder{
+      font-size: 12px;
+      line-height: 20px;
+      height: 20px;
+    }
+    .captionHolderBot {
+      top: 20px;
+    }
+    .solar-pv-service, .solar-thermal-service, .repairs-service{
+      grid-column: 2/31
+    }
+    .description-headers{
+      height: 1.5rem;
+      font-size: 1.1rem;
+    }
+    .description-text{
+      font-size: .8rem;
+    }
+    .description-link{
+      font-size: 1rem;
+    }
+  }
+  @media (max-width: 350px) {                /*350px Screen size*/
+    .captionHolderBot {
+      top: 15px;
+    }
+    .slideshow-form {
+      grid-template-rows: repeat(11, 2fr);
+    }
+    .gallery-container{
+      grid-row: 1/6;
+    }
+    .captionHolder{
+      font-size: 10px;
+      line-height: 15px;
+      height: 15px;
+    }
+    .review-para {
+      padding: 1rem .3rem .3rem 1rem;
+      font-size: .7rem;
+    }
+    .review-name {
+      font-size: 1rem;
+      bottom: .1rem;
+    }
+    #dotsContainer{
+      padding-top: 13px;
+    }
+    .dots{
+      width: 10px;
+      height: 10px;
+    }
+    .form {
+      grid-column: 6/26;
+      grid-row: 6/12;
+    }
+    .description-headers{
+      height: 1.3rem;
+      font-size: 1.1rem;
+    }
+    .description-text{
+      font-size: .7rem;
+    }
+    .description-link{
+      font-size: .8rem;
+    }
+    .form-paragraph{
+      font-size: .7rem;
+    }
+  }
